@@ -1,0 +1,16 @@
+Mostrar TODOS los usuarios
+GET  http://localhost:8085/usuarios
+
+Metodo para verificar el usuario (Login)
+
+CUSTOM  http://localhost:8085/usuarios/{id}
+
+Actualizar usuario
+PUT http://localhost:8085/usuarios/{id}/{nuevo_nombre}/{nueva_contraseña}/{nuevo_rol}
+
+Borrar usuario
+DELETE http://localhost:8085/usuarios/{id}
+
+Crear un usuario
+
+POST http://localhost:8085/usuarios/Luis/nueva_contraseña/admin

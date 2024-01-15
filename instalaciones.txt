@@ -1,0 +1,64 @@
+pip install mysql-connector-python flask
+
+-- Crear la base de datos
+CREATE DATABASE IF NOT EXISTS proyecto_mobiles;
+
+-- Seleccionar la base de datos
+USE proyecto_mobiles;
+
+-- Crear la tabla usuarios
+CREATE TABLE usuarios (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    usuario VARCHAR(255) NOT NULL,
+    contraseña VARCHAR(255) NOT NULL,
+    rol VARCHAR(50) NOT NULL
+);
+
+-- Crear la tabla catalogo
+CREATE TABLE catalogo (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_producto VARCHAR(255) NOT NULL,
+    imagenes MEDIUMBLOB,
+    precio DECIMAL(10, 2) NOT NULL,
+    categoria VARCHAR(50) NOT NULL
+);
+
+-- Crear la tabla pedidos con campos de Latitud y Longitud
+CREATE TABLE pedidos (
+    id_pedido INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT,
+    id_repartidor INT,
+    latitud DECIMAL(65, 8),
+    longitud DECIMAL(65, 8),
+    latitudC DECIMAL(65, 8),
+    longitudC DECIMAL(65, 8),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (id_repartidor) REFERENCES usuarios(id)
+);
+
+-- Crear la tabla detalles_pedido
+CREATE TABLE detalles_pedido (
+    id_detalle INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedido INT,
+    id_producto INT,
+    FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
+    FOREIGN KEY (id_producto) REFERENCES catalogo(id)
+);
+
+-- Empleado 7
+INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('daniel_gutierrez', 'empleado123', 'empleado');
+
+-- Empleado 8
+INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('clara_molina', 'claveempleado456', 'empleado');
+
+-- Empleado 9
+INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('alejandro_ramirez', '123456empleado', 'empleado');
+
+-- Cliente 7
+INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('patricia_sanchez', 'cliente789', 'cliente');
+
+-- Cliente 8
+INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('juan_gomez', 'gomezcliente123', 'cliente');
+
+-- Cliente 9
+INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('natalia_rojas', 'cliente456', 'cliente');
