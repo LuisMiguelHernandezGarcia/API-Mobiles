@@ -1,5 +1,3 @@
-pip install mysql-connector-python flask
-
 -- Crear la base de datos
 CREATE DATABASE IF NOT EXISTS proyecto_mobiles;
 
@@ -46,6 +44,7 @@ CREATE TABLE detalles_pedido (
     FOREIGN KEY (id_producto) REFERENCES catalogo(id)
 );
 
+INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('genericsuser', 'genericsuser', 'genericsuser');
 -- Empleado 7
 INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('daniel_gutierrez', 'empleado123', 'empleado');
 
@@ -63,3 +62,51 @@ INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('juan_gomez', 'gomezcli
 
 -- Cliente 9
 INSERT INTO usuarios (usuario, contraseña, rol) VALUES ('natalia_rojas', 'cliente456', 'cliente');
+-- Productos en el catálogo (sección bebidas)
+INSERT INTO catalogo (nombre_producto, imagenes, precio, categoria) 
+VALUES 
+('Botella de agua', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\botella_agua.jpeg'), 13.99, 'bebida'),
+
+('Jugo de naranja', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\jugo_naranja.jpeg'), 16.50, 'bebida'),
+
+('Coca cola', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\coca_cola.jpeg'), 14.75, 'bebida'),
+
+('Pepsi', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\pepsi.jpeg'), 15.25, 'bebida'),
+
+('Sprite', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\sprite.jpeg'), 17.99, 'bebida');
+
+-- Productos en el catálogo (sección ensaladas)
+INSERT INTO catalogo (nombre_producto, imagenes, precio, categoria) 
+VALUES 
+('Ensalada de pasta o arroz', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\epasta.jpg'), 59.99, 'ensalada'),
+
+('Ensalada de patata', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\epatata.jpg'), 65.99, 'ensalada'),
+
+('Ensalada mixta', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\emixta.jpg'), 79.99, 'ensalada'),
+
+('Ensalada Caprese', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\ecaprese.jpg'), 69.99, 'ensalada'),
+
+('Ensalada Waldorf', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\ewaldorf.jpg'), 84.99, 'ensalada'),
+
+('Ensalada rusa', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\erusa.jpg'), 63.99, 'ensalada'),
+
+('Ensalada griega', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\egriega.jpg'), 66.99, 'ensalada'),
+
+('Ensalada de col', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\ecol.jpg'), 60.99, 'ensalada');
+
+-- Productos en el catálogo (sección sándwiches)
+INSERT INTO catalogo (nombre_producto, imagenes, precio, categoria) 
+VALUES 
+('Hamburguesa Clásica', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\hclasica.jpeg'), 10.99, 'sándwich'),
+
+('Hamburguesa de Pollo', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\hpollo.jpeg'), 12.99, 'sándwich'),
+
+('Hamburguesa Vegana', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\hvegana.jpeg'), 8.99, 'sándwich'),
+
+('Hamburguesa de Pavo', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\hpavo.jpeg'), 11.99, 'sándwich'),
+
+('Hamburguesa de Sushi', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\hsushi.jpeg'), 14.99, 'sándwich'),
+
+('Hamburguesa Mexicana', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\hmexicana.jpeg'), 9.99, 'sándwich'),
+
+('Hamburguesa de Salmón', LOAD_FILE('C:\\Users\\eriks\\Downloads\\Api-Master(1)\\Api-Master\\hsalmon.jpeg'), 15.99, 'sándwich');
