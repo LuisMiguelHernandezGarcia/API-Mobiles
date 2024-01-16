@@ -393,6 +393,42 @@ class MiHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_header('Content-type', 'text/plain')
                 self.end_headers()
                 self.wfile.write(f"Error de conexión a la base de datos: {err}".encode('utf-8'))
+        elif self.path.startswith('/eliminar_pedido/'):
+            pedido_id = int(self.path.split('/')[-1])
+            try:
+                # Conexión a la base de datos
+                conexion = mysql.connector.connect(**db_config)
+                # Crear un cursor para ejecutar consultas SQL
+                cursor = conexion.cursor()
+
+                # Iniciar una transacción
+                cursor.execute("START TRANSACTION")
+
+                # Eliminar detalles del pedido
+                cursor.execute("DELETE FROM detalles_pedido WHERE id_pedido = %s", (pedido_id,))
+
+                # Eliminar el pedido
+                cursor.execute("DELETE FROM pedidos WHERE id_pedido = %s", (pedido_id,))
+
+                # Confirmar la transacción y cerrar cursor y conexión
+                cursor.execute("COMMIT")
+                cursor.close()
+                conexion.close()
+
+                # Enviar respuesta exitosa
+                self.send_response(200)
+                self.send_header('Content-type', 'text/plain')
+                self.end_headers()
+                self.wfile.write(b'ok')
+
+            except mysql.connector.Error as err:
+                # Realizar un rollback en caso de error
+                cursor.execute("ROLLBACK")
+                # Enviar mensaje de error si hay un problema con la base de datos
+                self.send_response(500)
+                self.send_header('Content-type', 'text/plain')
+                self.end_headers()
+                self.wfile.write(f"Error al eliminar el pedido: {err}".encode('utf-8'))
         else:
             # Utilizar el manejador original para otras rutas DELETE
             super().do_DELETE()
